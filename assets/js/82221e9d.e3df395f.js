@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkastro_docusaurus=self.webpackChunkastro_docusaurus||[]).push([[5150],{2104:s=>{s.exports=JSON.parse('{"label":"hello","permalink":"/astro/blog/tags/hello","allTagsPath":"/astro/blog/tags","count":2}')}}]);
