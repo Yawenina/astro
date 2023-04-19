@@ -44,17 +44,18 @@ function fetchArticleListByPage(pageNum) {
     return axios_1.default.get(`
     https://blog.sina.com.cn/s/articlelist_1347374793_5_${pageNum}.html 
   `).then(res => {
-        console.log('🚀### res =', res);
-        const dom = new jsdom_1.JSDOM(res.data);
-        return [...dom.window.document.querySelectorAll('.atc_title a')].reverse().map((item) => {
-            console.log('item', JSON.stringify(item), item.innerHTML);
-            return ({
-                title: item.innerHTML,
-                href: item.href
+        try {
+            const dom = new jsdom_1.JSDOM(res.data);
+            return [...dom.window.document.querySelectorAll('.atc_title a')].reverse().map((item) => {
+                return ({
+                    title: item.innerHTML,
+                    href: item.href
+                });
             });
-        });
+        }
+        catch (e) { }
     }).catch(e => {
-        console.error('fetchArticleListByPage', e);
+        // console.error('fetchArticleListByPage', e)
     });
 }
 function fetchArticleUrlList() {
@@ -66,8 +67,6 @@ function fetchArticleUrlList() {
             list = list.concat(pageList || []);
             i--;
         }
-        console.log('=== list', list);
-        console.log('🚀### path =', path.join(__dirname, 'articles/list.ts'));
         fsa.outputJSON(path.join(__dirname, '../articles/list.ts'), list, (err) => {
             if (err) {
                 return console.error('write list file error', err);
@@ -89,7 +88,9 @@ function fetchSinaArticle(item) {
 }
 function parseHTML(html, item) {
     var _a, _b, _c;
-    const dom = new jsdom_1.JSDOM(html);
+    const dom = new jsdom_1.JSDOM(html, {
+        url: "https://blog.sina.com.cn",
+    });
     const title = (_a = dom.window.document.querySelector('.titName')) === null || _a === void 0 ? void 0 : _a.innerHTML;
     let seriesNo = 1;
     let seriesTitle = title;
@@ -101,10 +102,8 @@ function parseHTML(html, item) {
     const article = dom.window.document.querySelectorAll('#sina_keyword_ad_area2 p');
     const sentences = Array.from(article).map((p) => {
         var _a, _b;
-        console.log('=== p', JSON.stringify(p), p.textContent);
         return (_b = (_a = p === null || p === void 0 ? void 0 : p.textContent) === null || _a === void 0 ? void 0 : _a.replace('<br>', '\n').split(/\n/).filter((text) => !!text)) === null || _b === void 0 ? void 0 : _b.join('\n');
     });
-    console.log('=== data', title, sentences);
     return {
         item,
         seriesNo,
@@ -116,14 +115,15 @@ function parseHTML(html, item) {
 function generateMd(data = {}) {
     const { seriesNo, seriesTitle, title, sentences, item } = data;
     const md = `---
-sidebar_position: ${seriesNo}
+title: ${title}
+slug: ${seriesNo}
+authors: soilAstro
 ---
 
 # ${title}
 ${sentences === null || sentences === void 0 ? void 0 : sentences.join('\n\n')}
   `;
-    console.log('=== md', md);
-    fsa.outputFile(path.join(__dirname, `../../docs/${seriesNo}.md`), md, (err) => {
+    fsa.outputFile(path.join(__dirname, `../../planets-in-12-houses/${seriesNo}.md`), md, (err) => {
         if (err) {
             console.log('write markdown failed', err);
         }
@@ -134,13 +134,12 @@ ${sentences === null || sentences === void 0 ? void 0 : sentences.join('\n\n')}
 }
 (function run() {
     return __awaiter(this, void 0, void 0, function* () {
-        for (let i = 13; i <= 22; i++) {
-            console.log(`⏰ 开始下载 【${i}】`);
-            const data = yield fetchSinaArticle(list_1.default[i]);
-            console.log(`😴 data`, data);
-            //const data = parseHTML(MOCK_HTML, LIST[i]);
-            generateMd(data);
-            console.log(`🎉 ${data === null || data === void 0 ? void 0 : data.title} 下载完成！`);
-        }
+        let i = 121;
+        // for (let i = 50; i >= 0; i--) {
+        console.log(`⏰ 开始下载 【${i}】`);
+        const data = yield fetchSinaArticle(list_1.default[0]);
+        generateMd(data);
+        console.log(`🎉 ${data === null || data === void 0 ? void 0 : data.title} 下载完成！`);
+        // }
     });
 })();
