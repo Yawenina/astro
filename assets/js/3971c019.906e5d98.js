@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkastro_docusaurus=self.webpackChunkastro_docusaurus||[]).push([[8533],{5626:e=>{e.exports=JSON.parse('{"permalink":"/planets-in-12-houses/page/6","page":6,"postsPerPage":10,"totalPages":11,"totalCount":108,"previousPage":"/planets-in-12-houses/page/5","nextPage":"/planets-in-12-houses/page/7","blogDescription":"Blog","blogTitle":"Blog"}')}}]);
