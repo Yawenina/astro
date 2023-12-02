@@ -80,6 +80,27 @@ const config = {
         blogSidebarCount: 'ALL',
       },
     ],
+    [
+      '@docusaurus/plugin-content-blog',
+      {
+        /**
+         * Required for any multi-instance plugin
+         */
+        id: 'treasures',
+        /**
+         * URL route for the blog section of your site.
+         * *DO NOT* include a trailing slash.
+         */
+        routeBasePath: 'treasures',
+        /**
+         * Path to data on filesystem relative to site dir.
+         */
+        path: './treasures',
+        editUrl:
+          'https://github.com/yawenina/astro/tree/main/treasures',
+        blogSidebarCount: 'ALL',
+      },
+    ],
   ],
 
   themeConfig:
@@ -101,6 +122,7 @@ const config = {
           //   label: 'Tutorial',
           // },
           {to: '/planets-in-12-houses', label: '行星落点系列', position: 'left'},
+          {to: '/treasures', label: '宝藏', position: 'left'},
           {
             href: 'https://github.com/facebook/docusaurus',
             label: 'GitHub',
@@ -117,6 +139,10 @@ const config = {
               {
                 label: '行星落点系列',
                 to: '/planets-in-12-houses',
+              },
+              {
+                label:'宝藏',
+                to: '/treasures',
               },
             ],
           },
