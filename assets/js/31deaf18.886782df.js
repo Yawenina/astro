@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkastro_docusaurus=self.webpackChunkastro_docusaurus||[]).push([[4645],{3945:s=>{s.exports=JSON.parse('{"permalink":"/astro/treasures","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
