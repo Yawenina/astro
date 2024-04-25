@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkastro_docusaurus=self.webpackChunkastro_docusaurus||[]).push([[6592],{3641:s=>{s.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"\u5360\u661f\u5e08\u84dd\u65af\u8bfa\u8c08\u661f\u5ea7","permalink":"/astro/treasures/0"}]}')}}]);

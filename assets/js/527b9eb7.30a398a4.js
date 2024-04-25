@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkastro_docusaurus=self.webpackChunkastro_docusaurus||[]).push([[5294],{513:s=>{s.exports=JSON.parse('{"name":"docusaurus-plugin-content-blog","id":"planets-in-12-houses"}')}}]);
